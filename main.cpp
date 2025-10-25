@@ -10,55 +10,60 @@
 using namespace std;
 using namespace std::chrono;
 
+double timeVectorRead(vector<string>& codesVector);
+double timeListRead(list<string>& codesList);
+double timeSetRead(set<string>& codesSet);
 int main() {
     ifstream fin("codes.txt");
     string code; 
     
     // collects file data with vector
-    auto startVector = high_resolution_clock::now();
     vector<string> codesVector;
-    while (fin >> code) {
-        codesVector.push_back(code); 
-    }
-    fin.close();
-    auto endVector = high_resolution_clock::now();
-    auto readVectorDuration = duration_cast<microseconds>(endVector - startVector);
-
+    double vectorReadTime = timeVectorRead(codesVector);
     // collects file data with list
-    fin.open("codes.txt");
-    auto startList = high_resolution_clock::now();
     list<string> codesList;
-    while (fin >> code) {
-        codesList.push_back(code); 
-    }
-    fin.close();
-    auto endList = high_resolution_clock::now();
-    auto readListDuration = duration_cast<microseconds>(endList - startList);
-
+    double listReadTime = timeListRead(codesList);
     // collects file data with set
-    fin.open("codes.txt");
-    auto startSet = high_resolution_clock::now();
     set<string> codesSet;
-    while (fin >> code) {
-        codesSet.insert(code); 
-    }
-    fin.close();
-    auto endSet = high_resolution_clock::now();
-    auto readSetDuration = duration_cast<microseconds>(endSet - startSet);
-    
+    double setReadTime = timeSetRead(codesSet);
     return 0;
 }
 
 double timeVectorRead(vector<string>& codesVector) { 
     ifstream fin("codes.txt");
     string code; 
-    auto startVector = high_resolution_clock::now();
-    vector<string> codesVector;
+    auto start = high_resolution_clock::now();
     while (fin >> code) {
         codesVector.push_back(code); 
     }
     fin.close();
-    auto endVector = high_resolution_clock::now();
-    auto readVectorDuration = duration_cast<microseconds>(endVector - startVector);
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
 }
 
+double timeListRead(list<string>& codesList) { 
+    ifstream fin("codes.txt");
+    string code; 
+    auto start = high_resolution_clock::now();
+    while (fin >> code) {
+        codesList.push_back(code); 
+    }
+    fin.close();
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
+
+double timeSetRead(set<string>& codesSet) { 
+    ifstream fin("codes.txt");
+    string code; 
+    auto start = high_resolution_clock::now();
+    while (fin >> code) {
+        codesSet.insert(code); 
+    }
+    fin.close();
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
