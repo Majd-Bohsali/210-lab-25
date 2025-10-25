@@ -22,9 +22,10 @@ int main() {
     }
     fin.close();
     auto endVector = high_resolution_clock::now();
-    auto readVectorDuration = duration_cast<milliseconds>(endVector - startVector);
+    auto readVectorDuration = duration_cast<microseconds>(endVector - startVector);
 
     // collects file data with list
+    fin.open("codes.txt");
     auto startList = high_resolution_clock::now();
     list<string> codesList;
     while (fin >> code) {
@@ -32,9 +33,10 @@ int main() {
     }
     fin.close();
     auto endList = high_resolution_clock::now();
-    auto readListDuration = duration_cast<milliseconds>(endList - startList);
+    auto readListDuration = duration_cast<microseconds>(endList - startList);
 
     // collects file data with set
+    fin.open("codes.txt");
     auto startSet = high_resolution_clock::now();
     set<string> codesSet;
     while (fin >> code) {
@@ -42,14 +44,21 @@ int main() {
     }
     fin.close();
     auto endSet = high_resolution_clock::now();
-    auto readSetDuration = duration_cast<milliseconds>(endSet - startSet);
+    auto readSetDuration = duration_cast<microseconds>(endSet - startSet);
     
     return 0;
 }
 
-/* syntax examples:
-auto start = high_resolution_clock::now()
-auto end = high_resolution_clock::now()
-auto duration = duration_cast<milliseconds>(end - start)
-duration.count() references elapsed milliseconds
-*/
+double timeVectorRead(vector<string>& codesVector) { 
+    ifstream fin("codes.txt");
+    string code; 
+    auto startVector = high_resolution_clock::now();
+    vector<string> codesVector;
+    while (fin >> code) {
+        codesVector.push_back(code); 
+    }
+    fin.close();
+    auto endVector = high_resolution_clock::now();
+    auto readVectorDuration = duration_cast<microseconds>(endVector - startVector);
+}
+
