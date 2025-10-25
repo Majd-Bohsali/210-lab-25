@@ -54,9 +54,10 @@ int main() {
     cout << right << setw(W) << "Read" << setw(W) << vectorReadTime << setw(W) << listReadTime << setw(W) << setReadTime << endl;
     cout << right << setw(W) << "Sort" << setw(W) << vectorSortTime << setw(W) << listSortTime << setw(W) << setSortTime << endl;
     cout << right << setw(W) << "Insert" << setw(W) << vectorInsertTime << setw(W) << listInsertTime << setw(W) << setInsertTime << endl;
+    
     return 0;
 }
-
+ 
 double timeVectorRead(vector<string>& codesVector) { 
     ifstream fin("codes.txt");
     string code; 
