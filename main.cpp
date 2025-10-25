@@ -42,10 +42,18 @@ int main() {
     // sort set
     double setSortTime = -1; // set is already sorted
 
+    // insert to vector
+    double vectorInsertTime = timeVectorInsert(codesVector);
+    // insert to list
+    double listInsertTime = timeListInsert(codesList);
+    // insert to set
+    double setInsertTime = timeSetInsert(codesSet);
+
     // print results to console
     cout << right << setw(W) << "Operation" << setw(W) << "Vector" << setw(W) << "List" << setw(W) << "Set" << endl;
     cout << right << setw(W) << "Read" << setw(W) << vectorReadTime << setw(W) << listReadTime << setw(W) << setReadTime << endl;
     cout << right << setw(W) << "Sort" << setw(W) << vectorSortTime << setw(W) << listSortTime << setw(W) << setSortTime << endl;
+    cout << right << setw(W) << "Insert" << setw(W) << vectorInsertTime << setw(W) << listInsertTime << setw(W) << setInsertTime << endl;
     return 0;
 }
 
@@ -106,7 +114,9 @@ double timeListSort(list<string>& codesList) {
 
 double timeVectorInsert(vector<string>& codesVector) {
     auto start = high_resolution_clock::now();
-    codesVector.insert((codesVector.begin() + codesVector.end()) / 2, "TESTCODE");
+    auto it = codesVector.begin(); 
+    int middleElement = codesVector.size()/2; 
+    codesVector.insert(it + middleElement, "TESTCODE");
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(end - start).count();
     return duration;
