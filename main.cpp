@@ -16,6 +16,11 @@ double timeListRead(list<string>& codesList);
 double timeSetRead(set<string>& codesSet);
 double timeVectorSort(vector<string>& codesVector);
 double timeListSort(list<string>& codesList);
+double timeVectorInsert(vector<string>& codesVector);
+double timeListInsert(list<string>& codesList);
+double timeSetInsert(set<string>& codesSet);
+
+const int W = 10;
 int main() {
     ifstream fin("codes.txt");
     string code; 
@@ -38,9 +43,9 @@ int main() {
     double setSortTime = -1; // set is already sorted
 
     // print results to console
-    cout << right << setw(10) << "Operation" << setw(10) << "Vector" << setw(10) << "List" << setw(10) << "Set" << endl;
-    cout << right << setw(10) << "Read" << setw(10) << vectorReadTime << setw(10) << listReadTime << setw(10) << setReadTime << endl;
-    cout << right << setw(10) << "Sort" << setw(10) << vectorSortTime << setw(10) << listSortTime << setw(10) << setSortTime << endl;
+    cout << right << setw(W) << "Operation" << setw(W) << "Vector" << setw(W) << "List" << setw(W) << "Set" << endl;
+    cout << right << setw(W) << "Read" << setw(W) << vectorReadTime << setw(W) << listReadTime << setw(W) << setReadTime << endl;
+    cout << right << setw(W) << "Sort" << setw(W) << vectorSortTime << setw(W) << listSortTime << setw(W) << setSortTime << endl;
     return 0;
 }
 
@@ -94,6 +99,30 @@ double timeVectorSort(vector<string>& codesVector) {
 double timeListSort(list<string>& codesList) {
     auto start = high_resolution_clock::now();
     codesList.sort();
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
+
+double timeVectorInsert(vector<string>& codesVector) {
+    auto start = high_resolution_clock::now();
+    codesVector.insert((codesVector.begin() + codesVector.end()) / 2, "TESTCODE");
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
+
+double timeListInsert(list<string>& codesList) {
+    auto start = high_resolution_clock::now();
+    codesList.insert((codesList.begin() + codesList.end()) / 2, "TESTCODE");
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
+
+double timeSetInsert(set<string>& codesSet) {
+    auto start = high_resolution_clock::now();
+    codesSet.insert("TESTCODE");
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(end - start).count();
     return duration;
