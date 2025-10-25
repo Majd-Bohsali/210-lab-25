@@ -114,7 +114,11 @@ double timeVectorInsert(vector<string>& codesVector) {
 
 double timeListInsert(list<string>& codesList) {
     auto start = high_resolution_clock::now();
-    codesList.insert((codesList.begin() + codesList.end()) / 2, "TESTCODE");
+    //codesList.insert((codesList.begin() + codesList.end()) / 2, "TESTCODE");
+    auto it = codesList.begin(); 
+    int middleElement = codesList.size()/2; 
+    advance(it, middleElement); 
+    codesList.insert(it, "TESTCODE");  
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(end - start).count();
     return duration;
