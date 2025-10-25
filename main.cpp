@@ -25,9 +25,6 @@ double timeSetDelete(set<string>& codesSet);
 
 const int W = 10;
 int main() {
-    ifstream fin("codes.txt");
-    string code; 
-    
     // collects file data with vector
     vector<string> codesVector;
     double vectorReadTime = timeVectorRead(codesVector);
@@ -52,12 +49,19 @@ int main() {
     // insert to set
     double setInsertTime = timeSetInsert(codesSet);
 
+    // delete middle element from vector
+    double vectorDeleteTime = timeVectorDelete(codesVector);
+    // delete middle element from list
+    double listDeleteTime = timeListDelete(codesList);
+    // delete middle element from set
+    double setDeleteTime = timeSetDelete(codesSet);
+
     // print results to console
     cout << right << setw(W) << "Operation" << setw(W) << "Vector" << setw(W) << "List" << setw(W) << "Set" << endl;
     cout << right << setw(W) << "Read" << setw(W) << vectorReadTime << setw(W) << listReadTime << setw(W) << setReadTime << endl;
     cout << right << setw(W) << "Sort" << setw(W) << vectorSortTime << setw(W) << listSortTime << setw(W) << setSortTime << endl;
     cout << right << setw(W) << "Insert" << setw(W) << vectorInsertTime << setw(W) << listInsertTime << setw(W) << setInsertTime << endl;
-
+    cout << right << setw(W) << "Delete" << setw(W) << vectorDeleteTime << setw(W) << listDeleteTime << setw(W) << setDeleteTime << endl;
     return 0;
 }
  
@@ -147,6 +151,32 @@ double timeSetInsert(set<string>& codesSet) {
 }
 
 
-double timeVectorDelete(vector<string>& codesVector);
-double timeListDelete(list<string>& codesList);
-double timeSetDelete(set<string>& codesSet);
+double timeVectorDelete(vector<string>& codesVector) {
+    auto start = high_resolution_clock::now();
+    auto it = codesVector.begin(); 
+    int middleElement = codesVector.size()/2; 
+    codesVector.erase(it + middleElement);
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
+
+double timeListDelete(list<string>& codesList) {
+    auto start = high_resolution_clock::now();
+    //codesList.insert((codesList.begin() + codesList.end()) / 2, "TESTCODE");
+    auto it = codesList.begin(); 
+    int middleElement = codesList.size()/2; 
+    advance(it, middleElement); 
+    codesList.erase(it);  
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+} 
+
+double timeSetDelete(set<string>& codesSet){
+    auto start = high_resolution_clock::now();
+    codesSet.erase("TESTCODE");
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
