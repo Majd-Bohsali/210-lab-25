@@ -7,12 +7,15 @@
 #include <vector>
 #include <list>
 #include <set> 
+#include <algorithm>
 using namespace std;
 using namespace std::chrono;
 
 double timeVectorRead(vector<string>& codesVector);
 double timeListRead(list<string>& codesList);
 double timeSetRead(set<string>& codesSet);
+double timeVectorSort(vector<string>& codesVector);
+double timeListSort(list<string>& codesList);
 int main() {
     ifstream fin("codes.txt");
     string code; 
@@ -27,9 +30,17 @@ int main() {
     set<string> codesSet;
     double setReadTime = timeSetRead(codesSet);
 
+    // sorts vector
+    double vectorSortTime = timeVectorSort(codesVector);
+    // sorts list
+    double listSortTime = timeListSort(codesList);
+    // sort set
+    double setSortTime = -1; // set is already sorted
+
     // print results to console
     cout << right << setw(10) << "Operation" << setw(10) << "Vector" << setw(10) << "List" << setw(10) << "Set" << endl;
     cout << right << setw(10) << "Read" << setw(10) << vectorReadTime << setw(10) << listReadTime << setw(10) << setReadTime << endl;
+    cout << right << setw(10) << "Sort" << setw(10) << vectorSortTime << setw(10) << listSortTime << setw(10) << setSortTime << endl;
     return 0;
 }
 
@@ -67,6 +78,22 @@ double timeSetRead(set<string>& codesSet) {
         codesSet.insert(code); 
     }
     fin.close();
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
+
+double timeVectorSort(vector<string>& codesVector) {
+    auto start = high_resolution_clock::now();
+    sort(codesVector.begin(), codesVector.end());
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(end - start).count();
+    return duration;
+}
+
+double timeListSort(list<string>& codesList) {
+    auto start = high_resolution_clock::now();
+    codesList.sort();
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(end - start).count();
     return duration;
