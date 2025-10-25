@@ -19,6 +19,9 @@ double timeListSort(list<string>& codesList);
 double timeVectorInsert(vector<string>& codesVector);
 double timeListInsert(list<string>& codesList);
 double timeSetInsert(set<string>& codesSet);
+double timeVectorDelete(vector<string>& codesVector);
+double timeListDelete(list<string>& codesList);
+double timeSetDelete(set<string>& codesSet);
 
 const int W = 10;
 int main() {
@@ -54,7 +57,7 @@ int main() {
     cout << right << setw(W) << "Read" << setw(W) << vectorReadTime << setw(W) << listReadTime << setw(W) << setReadTime << endl;
     cout << right << setw(W) << "Sort" << setw(W) << vectorSortTime << setw(W) << listSortTime << setw(W) << setSortTime << endl;
     cout << right << setw(W) << "Insert" << setw(W) << vectorInsertTime << setw(W) << listInsertTime << setw(W) << setInsertTime << endl;
-    
+
     return 0;
 }
  
@@ -142,3 +145,8 @@ double timeSetInsert(set<string>& codesSet) {
     auto duration = duration_cast<microseconds>(end - start).count();
     return duration;
 }
+
+
+double timeVectorDelete(vector<string>& codesVector);
+double timeListDelete(list<string>& codesList);
+double timeSetDelete(set<string>& codesSet);
