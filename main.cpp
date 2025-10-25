@@ -22,9 +22,8 @@ double timeSetInsert(set<string>& codesSet);
 double timeVectorDelete(vector<string>& codesVector);
 double timeListDelete(list<string>& codesList);
 double timeSetDelete(set<string>& codesSet);
-
 const int W = 10;
-int main() {
+int main() {    
     // collects file data with vector
     vector<string> codesVector;
     double vectorReadTime = timeVectorRead(codesVector);
