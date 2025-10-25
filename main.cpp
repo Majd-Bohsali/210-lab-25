@@ -26,6 +26,10 @@ int main() {
     // collects file data with set
     set<string> codesSet;
     double setReadTime = timeSetRead(codesSet);
+
+    // print results to console
+    cout << right << setw(10) << "Operation" << setw(10) << "Vector" << setw(10) << "List" << setw(10) << "Set" << endl;
+    cout << right << setw(10) << "Read" << setw(10) << vectorReadTime << setw(10) << listReadTime << setw(10) << setReadTime << endl;
     return 0;
 }
 
