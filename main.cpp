@@ -7,6 +7,7 @@
 #include <vector>
 #include <list>
 #include <set> 
+#include <string>
 #include <algorithm>
 using namespace std;
 using namespace std::chrono;
@@ -131,7 +132,6 @@ double timeVectorInsert(vector<string>& codesVector) {
 
 double timeListInsert(list<string>& codesList) {
     auto start = high_resolution_clock::now();
-    //codesList.insert((codesList.begin() + codesList.end()) / 2, "TESTCODE");
     auto it = codesList.begin(); 
     int middleElement = codesList.size()/2; 
     advance(it, middleElement); 
@@ -162,7 +162,6 @@ double timeVectorDelete(vector<string>& codesVector) {
 
 double timeListDelete(list<string>& codesList) {
     auto start = high_resolution_clock::now();
-    //codesList.insert((codesList.begin() + codesList.end()) / 2, "TESTCODE");
     auto it = codesList.begin(); 
     int middleElement = codesList.size()/2; 
     advance(it, middleElement); 
